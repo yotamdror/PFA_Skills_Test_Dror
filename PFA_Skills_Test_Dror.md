@@ -1,11 +1,15 @@
-**Short answers: 
+**Answers** 
 
-1) 2037
+1)2037
+
+
 2)1098
+
+
 3)1017
 
 
-# PFA Skills Test
+# PFA Skills Test (actual work and code)
 
 Before importing, had to fix some data issues (missing comma for "Female Rank 2")
 
