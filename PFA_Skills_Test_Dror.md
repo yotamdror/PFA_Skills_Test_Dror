@@ -4,7 +4,7 @@
 1. 2037 active voters 
 2. 1098 active voters
 3. 1017 households 
-4. On last 2 pages. 
+4. On last 2 pages 
 
 ### Code:
 
