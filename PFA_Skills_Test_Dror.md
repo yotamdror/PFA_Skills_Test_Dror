@@ -27,7 +27,7 @@ names['Year']=names['Year'].astype(str)  #we don't want to aggregate year, so we
 
 ## Names table is good to go
 
-#### **Question 1:**
+### **Question 1:**
 How many active voters in Noble County have a first name that has ever appeared among the most popular names?
 
 There are **2037** active voters in Noble County whose first name has appeared among the most popular names.
