@@ -30,8 +30,9 @@ names['Year']=names['Year'].astype(str)  #we don't want to aggregate year, so we
 #### **Question 1:**
 How many active voters in Noble County have a first name that has ever appeared among the most popular names?
 
-There are **2037** active voters in Noble County whose first name has appeared among the most popular names
- I'll create a filter of all the first names from the names table:
+There are **2037** active voters in Noble County whose first name has appeared among the most popular names.
+
+I created a filter of all the first names from the names table:
 
 
 ```python
