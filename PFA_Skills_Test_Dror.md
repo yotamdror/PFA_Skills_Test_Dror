@@ -1,3 +1,9 @@
+**Short answers: 
+
+1) 2037
+2)1098
+3)1017
+
 
 # PFA Skills Test
 
