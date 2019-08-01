@@ -1,17 +1,7 @@
-**Answers** 
 
-1)2037
+# PFA Skills Test
 
-
-2)1098
-
-
-3)1017
-
-
-# PFA Skills Test (actual work and code)
-
-Before importing, had to fix some data issues (missing comma for "Female Rank 2")
+(Before importing, had to fix the missing comma for "Female Rank 2")
 
 Packages used:
 
@@ -38,11 +28,9 @@ names['Year']=names['Year'].astype(str)  #we don't want to aggregate year, so we
 ## Names table is good to go
 
 #### **Question 1:**
-_How many active voters in Noble County have a first name that has ever appeared among the most popular names?_
+How many active voters in Noble County have a first name that has ever appeared among the most popular names?
 
 There are **2037** active voters in Noble County whose first name has appeared among the most popular names.
-
-I created a filter of all the first names from the names table:
 
 
 ```python
@@ -57,13 +45,7 @@ noble = pd.read_csv("NOBLE.txt") #data from https://www6.sos.state.oh.us/ords/f?
 noble['popname'] = noble.FIRST_NAME.isin(thefilter) #adds boolean for if name is in the popular name list
 noble['Year'] = noble['DATE_OF_BIRTH'].str[:4] #adds new column for year of birth 
 noble = noble[noble.VOTER_STATUS=='ACTIVE'] #only show rows where VOTER_STATUS is active
-```
-
-and then counting the number of "true":
-
-
-```python
-noble.popname.value_counts()
+noble.popname.value_counts() #counting the number of 'true'
 ```
 
 
@@ -76,22 +58,13 @@ noble.popname.value_counts()
 
 
 ### **Question 2:** 
-_How many active voters in Noble County have a first name that was among the most popular names in the year they were born?_
+How many active voters in Noble County have a first name that was among the most popular names in the year they were born?
 
 #### There are **1098** active voters in Noble County whose first name was popular the year they were born.
 
 
-By doing an inner join between the names and noble table, we'll only see rows in which both the FIRST_NAME and Year match.
-
-
 ```python
 merge = noble.merge(names, on=['FIRST_NAME','Year'], how='inner')
-```
-
-followed by a a count of the FIRST_NAME in the new table:
-
-
-```python
 merge.FIRST_NAME.count()
 ```
 
@@ -103,21 +76,15 @@ merge.FIRST_NAME.count()
 
 
 ### **Question 3**
-_How many households in Noble County with at least one registered voter also contain at least one voter with a first name among the most popular in the year they were born?_
+How many households in Noble County with at least one registered voter also contain at least one voter with a first name among the most popular in the year they were born?
 
 There are **1017** households with at least one voter whose name was popular the year they were born.
-
-Since we now have a table with all the active voters with popular names the year they were born, we just need to count the number of unique addresses. 
-
-***But!***
-
-It's possible that there's more than one household per address - either because there are apartments, or because the same street name may exist multiple times in a single county. Therefore, rather than just counting the number of unique addresses, we actually want to count the number of unique combinations of address, secondary address (for apartments), and zipcode (for different streets with the same name). 
-
 
 
 ```python
 merge['RESIDENTIAL_SECONDARY_ADDR']=merge.RESIDENTIAL_SECONDARY_ADDR.fillna('NA') #filling in blank secondary addresses for grouping
-merge.groupby(['RESIDENTIAL_ADDRESS1','RESIDENTIAL_SECONDARY_ADDR','RESIDENTIAL_ZIP']).ngroups
+merge.groupby(['RESIDENTIAL_ADDRESS1','RESIDENTIAL_SECONDARY_ADDR','RESIDENTIAL_ZIP']).ngroups 
+#finding every unique combination of address, secondary address (for apartments), and zipcode (for multiples of street names)
 ```
 
 
@@ -145,10 +112,10 @@ sns.despine(left=True, bottom=True)
 ```
 
 
-![png](output_17_0.png)
+![png](output_13_0.png)
 
 
-### And another visualization
+### And another visualization just for fun
 
 
 ```python
@@ -171,17 +138,22 @@ ax.xaxis.label.set_visible(False)
 ax.set_xticks(['1999','1979', '1959', '1939'] )
 ax.set_xticklabels(['Voters age 20+','Voters age 40+', 'Voters age 60+', 'Voters age 80+'], horizontalalignment = 'left', fontsize='10')
 sns.despine(left=True, bottom=True)
-plt.title("Number of Noble County 2016 voters by age", fontsize=20, loc='left')
+plt.title("Number of Noble County voters by age in the 2016 election", fontsize=20, loc='left')
 
 ```
 
 
 
 
-    Text(0.0, 1.0, 'Number of Noble County 2016 voters by age')
+    Text(0.0, 1.0, 'Number of Noble County voters by age in the 2016 election')
 
 
 
 
-![png](output_20_1.png)
+![png](output_16_1.png)
 
+
+
+```python
+
+```
